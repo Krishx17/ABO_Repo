@@ -1,0 +1,32 @@
+<template>
+    <lightning-card title="Search Doctors">
+        <lightning-tabset>
+            <!-- Tab 1: Name -->
+            <lightning-tab label="Name">
+                <lightning-input label="First Name" data-field="firstName" type="text" onchange={handleInputChange}
+                    class="input-field"></lightning-input>
+                <lightning-input label="Last Name" data-field="lastName" type="text" onchange={handleInputChange}
+                    class="input-field"></lightning-input>
+            </lightning-tab>
+            <!-- Tab 2: Location -->
+            <lightning-tab label="Location">
+                <lightning-input label="City" data-field="city" type="text" onchange={handleInputChange}
+                    class="input-field"></lightning-input>
+                <lightning-input label="State" data-field="state" type="text" onchange={handleInputChange}
+                    class="input-field"></lightning-input>
+            </lightning-tab>
+
+            <!-- Tab 3: Name and Location -->
+            <lightning-tab label="Name and Location">
+                <lightning-input label="First Name" data-field="firstName" type="text" onchange={handleInputChange}
+                    class="input-field"></lightning-input>
+                <lightning-input label="City" data-field="city" type="text" onchange={handleInputChange}
+                    class="input-field"></lightning-input>
+            </lightning-tab>
+        </lightning-tabset>
+
+        <lightning-button label={buttonLabel} variant="brand" onclick={handleSearch} class="search-button"
+            disabled={isLoading}></lightning-button>
+    </lightning-card>
+    <lightning-map map-markers={mapMarkers} markers-title="Locations"></lightning-map>
+</template>
