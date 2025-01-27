@@ -1,41 +1,55 @@
-import { LightningElement, wire } from 'lwc';
+import { LightningElement, track } from 'lwc';
 import getFilteredDoctors from '@salesforce/apex/FetchRelevantRecords.getFilteredDoctors';
+
 export default class DoctorLocationMap extends LightningElement {
-    mapMarkers = [];
-    error;
+    @track mapMarkers = [];
+    @track error;
+    @track isLoading = false;
 
-    // Parameters for location filtering (update dynamically if needed)
-    city = 'Los Angeles';
-    state = 'CA';
+    city = '';
+    state = '';
 
-    @wire(getFilteredDoctors, { city: '$city'})
-    wiredDoctors({ error, data }) {
-        console.log(data);
-        if (data) {
-            this.mapMarkers = data.map(doctor => ({
-                location: {
-                    City: doctor.City__c,
-                    Country: doctor.Country__c,
-                    PostalCode: doctor.PostalCode__c,
-                    State: doctor.State__c,
-                    Street: doctor.Street__c
-                },
-                value: doctor.Id,
-                title: doctor.Name,
-                description: doctor.Description__c || 'No specialty provided',
-                icon: 'standard:user'
-            }));
-            this.error = undefined;
-        } else if (error) {
-            console.log("in else if");
-            this.error = error;
-            this.mapMarkers = [];
-        }
+    // Capture input changes dynamically
+    handleInputChange(event) {
+        const field = event.target.dataset.field; // Get the field from dataset
+        this[field] = event.target.value; // Update the corresponding property
+    }
+
+    // Handle search button click
+    handleSearch() {
+        this.isLoading = true;
+
+        // Call the Apex method with dynamic parameters
+        getFilteredDoctors({
+            city: this.city,
+            state: this.state
+        })
+            .then((data) => {
+                this.mapMarkers = data.map((doctor) => ({
+                    location: {
+                        City: doctor.City__c,
+                        Country: doctor.Country__c,
+                        PostalCode: doctor.PostalCode__c,
+                        State: doctor.State__c,
+                        Street: doctor.Street__c
+                    },
+                    value: doctor.Id,
+                    title: doctor.Name,
+                    description: doctor.Description__c || 'No specialty provided',
+                    icon: 'standard:user'
+                }));
+                this.error = undefined;
+            })
+            .catch((error) => {
+                this.error = error;
+                this.mapMarkers = [];
+            })
+            .finally(() => {
+                this.isLoading = false;
+            });
+    }
+
+    get buttonLabel() {
+        return this.isLoading ? 'Searching...' : 'Search';
     }
 }
-
-//client se jo variables ki value hai location ki and name ki vo 
-
-//html figure out krni h
-
-//search feature enhancement    
