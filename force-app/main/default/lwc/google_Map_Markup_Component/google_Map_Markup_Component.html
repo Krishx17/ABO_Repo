@@ -1,3 +1,40 @@
 <template>
-    <lightning-map map-markers={mapMarkers} markers-title="Locations"></lightning-map>
+    <lightning-card title="Search Doctors">
+        <!-- Tabset for input fields -->
+        <lightning-tabset>
+            <!-- Tab for Location -->
+            <lightning-tab label="Location">
+                <lightning-input
+                    label="City"
+                    data-field="city"
+                    type="text"
+                    class="input-field"
+                    onchange={handleInputChange}
+                ></lightning-input>
+                <lightning-input
+                    label="State"
+                    data-field="state"
+                    type="text"
+                    class="input-field"
+                    onchange={handleInputChange}
+                ></lightning-input>
+            </lightning-tab>
+        </lightning-tabset>
+
+        <!-- Search Button -->
+        <lightning-button
+            label={buttonLabel}
+            variant="brand"
+            onclick={handleSearch}
+            class="search-button"
+            disabled={isLoading}
+        ></lightning-button>
+    </lightning-card>
+
+    <!-- Google Map Markup -->
+    <lightning-map
+        map-markers={mapMarkers}
+        markers-title="Locations"
+        zoom-level="12"
+    ></lightning-map>
 </template>
