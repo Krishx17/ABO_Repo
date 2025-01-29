@@ -1,0 +1,52 @@
+<template>
+  <lightning-card title="Dynamic Accordion" icon-name="utility:list">
+      <template if:true={accordionData}>
+          <template for:each={accordionData} for:item="aboutSection">
+              <lightning-accordion allow-multiple-sections="true" active-section-name={activeSections} class="slds-m-around_medium" key={aboutSection.key} onclick={handleToggleSection}>
+                  <!--lightning-accordion-section name={aboutSection.key} label={aboutSection.label}-->
+                      <template for:each={aboutSection.sections} for:item="section">
+                          <lightning-accordion-section name={section.pageName} label={section.label} key={section.key}>
+                              <template for:each={section.subSections} for:item="subSection">
+                                  <div class="slds-m-around_small" key={subSection.key}>
+                                      <!-- <h4>{subSection.label}</h4>
+                                      <p><lightning-formatted-url key={subSection.key} name={subSection.pageName} label={subSection.label} onclick={handleToggleSection} target="_blank"></lightning-formatted-url></p> -->
+                                      <a href="javascript:void(0);" onclick={handleUrlClick} name={subSection.pageName} class="url-link" target="_self">{subSection.label}</a>
+                                  </div>
+                              </template>
+                          </lightning-accordion-section>
+                      </template>
+                  <!--/lightning-accordion-section-->
+              </lightning-accordion>
+          </template>
+      </template>
+      <template if:false={accordionData}>
+          <p>No Data Available</p>
+      </template>
+  </lightning-card>
+</template>
+
+<!-- <template>
+  <lightning-card title="Dynamic Accordion" icon-name="utility:list">
+      <template if:true={accordionData}>
+          <template for:each={accordionData} for:item="aboutSection">
+              <lightning-accordion allow-multiple-sections="true" class="slds-m-around_medium" key={aboutSection.key}>
+                  <lightning-accordion-section name={aboutSection.key} label={aboutSection.label}>
+                      <template for:each={aboutSection.sections} for:item="section">
+                          <lightning-accordion-section name={section.key} label={section.label} key={section.key}>
+                              <template for:each={section.subSections} for:item="subSection">
+                                  <div class="slds-m-around_small" key={subSection.key}>
+                                      <h4>{subSection.label}</h4>
+                                      <p>{subSection.description}</p>
+                                  </div>
+                              </template>
+                          </lightning-accordion-section>
+                      </template>
+                  </lightning-accordion-section>
+              </lightning-accordion>
+          </template>
+      </template>
+      <template if:false={accordionData}>
+          <p>No Data Available</p>
+      </template>
+  </lightning-card>
+</template> -->
