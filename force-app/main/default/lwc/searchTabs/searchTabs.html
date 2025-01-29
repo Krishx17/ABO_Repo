@@ -1,61 +1,174 @@
 <template>
-  <lightning-card title="Search Doctors">
-      <lightning-tabset>
-          <!-- Tab 1: Name -->
-          <lightning-tab label="Name">
-              <lightning-input
-                  label="First Name"
-                  data-field="firstName"
-                  type="text"
-                  class="input-field"
-              ></lightning-input>
-              <lightning-input
-                  label="Last Name"
-                  data-field="lastName"
-                  type="text"
-                  class="input-field"
-              ></lightning-input>
-          </lightning-tab>
+    <div class="header-container">
+        <!-- Dynamic Header -->
+        <h1 class="header">{verifyPhysicianHeader}</h1>
 
-          <!-- Tab 2: Location -->
-          <lightning-tab label="Location">
-              <lightning-input
-                  label="City"
-                  data-field="city"
-                  type="text"
-                  class="input-field"
-              ></lightning-input>
-              <lightning-input
-                  label="State"
-                  data-field="state"
-                  type="text"
-                  class="input-field"
-              ></lightning-input>
-          </lightning-tab>
+        <!-- Dynamic Instructions -->
+        <p class="instructions">{verifyPhysicianInstructions}</p>
+    </div>
 
-          <!-- Tab 3: Name and Location -->
-          <lightning-tab label="Name and Location">
-              <lightning-input
-                  label="First Name"
-                  data-field="firstName"
-                  type="text"
-                  class="input-field"
-              ></lightning-input>
-              <lightning-input
-                  label="City"
-                  data-field="city"
-                  type="text"
-                  class="input-field"
-              ></lightning-input>
-          </lightning-tab>
-      </lightning-tabset>
+    <lightning-card>
+        <lightning-tabset>
+            <!-- Tab 1: Name -->
+            <lightning-tab label="Name">
+                <lightning-input
+                    label="First Name"
+                    data-field="firstName"
+                    type="text"
+                    onchange={handleInputChange}
+                    class="input-field"
+                ></lightning-input>
+                <lightning-input
+                    label="Last Name"
+                    data-field="lastName"
+                    type="text"
+                    onchange={handleInputChange}
+                    class="input-field"
+                    required
+                ></lightning-input>
+                <lightning-combobox
+                        label="Gender"
+                        data-field="gender"
+                        value={gender}
+                        onchange={handleInputChange}
+                        options={genderOptions}
+                        class="input-field"
+                    ></lightning-combobox>
+            </lightning-tab>
 
-      <lightning-button
-          label={isLoading ? 'Searching...' : 'Search'}
-          variant="brand"
-          onclick={handleSearch}
-          class="search-button"
-          disabled={isLoading}
-      ></lightning-button>
-  </lightning-card>
+            <!-- Tab 2: Location -->
+            <lightning-tab label="Location">
+                <div class="location-tab-container">
+                    <!-- Location Fields -->
+                    <div class="location-container">
+                        <h2 class="location-heading">Location</h2>
+                        <lightning-input
+                            label="Postal Code"
+                            data-field="postalCode"
+                            type="text"
+                            onchange={handleInputChange}
+                            class="input-field"
+                            required
+                        ></lightning-input>
+                        <p class="or-divider">OR</p>
+                        <div class="city-state-container">
+                            <lightning-input
+                                label="City"
+                                data-field="city"
+                                type="text"
+                                onchange={handleInputChange}
+                                class="input-field"
+                            ></lightning-input>
+                            <lightning-input
+                                label="State"
+                                data-field="state"
+                                onchange={handleInputChange}
+                                options={stateOptions}
+                                class="input-field"
+                                required
+                            ></lightning-input>
+                        </div>
+                    </div>
+
+                    <!-- Within Distance Slider -->
+                    <div class="within-container">
+                        <h2 class="within-heading">Within</h2>
+                        <lightning-slider
+                            label="Distance (miles)"
+                            data-field="distance"
+                            min="5"
+                            max="50"
+                            step="5"
+                            value={distance}
+                            onchange={handleInputChange}
+                            class="slider"
+                        ></lightning-slider>
+                        <p class="distance-label">Selected Distance: {distance} miles</p>
+                    </div>
+                </div>
+            </lightning-tab>
+
+            <!-- Tab 3: Name and Location -->
+            <lightning-tab label="Name and Location">
+                <div class="name-location-container">
+                    <!-- Name Fields -->
+                    <lightning-input
+                        label="First Name"
+                        data-field="firstName"
+                        type="text"
+                        onchange={handleInputChange}
+                        class="input-field"
+                    ></lightning-input>
+                    <lightning-input
+                        label="Last Name"
+                        data-field="lastName"
+                        type="text"
+                        onchange={handleInputChange}
+                        class="input-field"
+                        required
+                    ></lightning-input>
+
+                    <!-- Location Fields -->
+                    <lightning-input
+                        label="Postal Code"
+                        data-field="postalCode"
+                        type="text"
+                        onchange={handleInputChange}
+                        class="input-field"
+                    ></lightning-input>
+                    <!-- <p class="or-divider">OR</p> -->
+                    <div class="location-container">
+                        <lightning-input
+                            label="City"
+                            data-field="city"
+                            type="text"
+                            onchange={handleInputChange}
+                            class="input-field"
+                        ></lightning-input>
+                        <lightning-input
+                            label="State"
+                            data-field="state"
+                            onchange={handleInputChange}
+                            options={stateOptions}
+                            class="input-field"
+                        ></lightning-input>
+                        <div class="within-container">
+                            <h2 class="within-heading">Within</h2>
+                            <lightning-slider
+                                label="Distance (miles)"
+                                data-field="distance"
+                                min="5"
+                                max="50"
+                                step="5"
+                                value={distance}
+                                onchange={handleInputChange}
+                                class="slider"
+                            ></lightning-slider>
+                            <p class="distance-label">Selected Distance: {distance} miles</p>
+                        </div>
+                    </div>
+                </div>
+            </lightning-tab>
+        </lightning-tabset>
+
+        <lightning-button
+            label={buttonLabel}
+            variant="brand"
+            onclick={handleSearch}
+            class="search-button"
+            disabled={isLoading}
+        ></lightning-button>
+    </lightning-card>
+    <template if:true={mapMarkers.length}>
+        <lightning-map map-markers={mapMarkers} markers-title="Locations"></lightning-map>
+    </template>
+
+    <template if:true={noRecordsFound}>
+        <p class="no-records">No Doctors found in your area.</p>
+    </template>
+
+    <template if:true={error}>
+        <p class="error-message">{error}</p>
+    </template>
+    
 </template>
