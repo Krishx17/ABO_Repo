@@ -67,6 +67,14 @@
                                 class="input-field"
                                 required
                             ></lightning-input>
+                            <lightning-combobox
+                        label="Gender"
+                        data-field="gender"
+                        value={gender}
+                        onchange={handleInputChange}
+                        options={genderOptions}
+                        class="input-field"
+                    ></lightning-combobox>
                         </div>
                     </div>
 
@@ -116,6 +124,14 @@
                         onchange={handleInputChange}
                         class="input-field"
                     ></lightning-input>
+                    <lightning-combobox
+                        label="Gender"
+                        data-field="gender"
+                        value={gender}
+                        onchange={handleInputChange}
+                        options={genderOptions}
+                        class="input-field"
+                    ></lightning-combobox>
                     <!-- <p class="or-divider">OR</p> -->
                     <div class="location-container">
                         <lightning-input

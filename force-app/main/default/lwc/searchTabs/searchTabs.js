@@ -69,7 +69,9 @@ export default class DoctorLocationMap extends LightningElement {
                             Country: doctor.Country__c,
                             PostalCode: doctor.PostalCode__c,
                             State: doctor.State__c,
-                            Street: doctor.Street__c
+                            Street: doctor.Street__c,
+                            Gender:doctor.Gender__c
+
                         },
                         value: doctor.Id,
                         title: doctor.Name,
