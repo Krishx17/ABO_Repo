@@ -1,0 +1,102 @@
+.header-container {
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.header {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #2C3E50;
+}
+
+.instructions {
+    font-size: 1rem;
+    color: #7F8C8D;
+    margin-top: 0.5rem;
+}
+
+.card-container {
+    padding: 1rem;
+    border-radius: 8px;
+    background-color: #FDFEFE;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.tab-container {
+    margin-top: 1rem;
+}
+
+.input-field {
+    margin-bottom: 1rem;
+    width: 100%;
+}
+
+.location-tab-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.location-heading,
+.within-heading {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #34495E;
+    margin-bottom: 0.5rem;
+}
+
+.city-state-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.within-container {
+    text-align: center;
+}
+
+.slider {
+    width: 100%;
+}
+
+.distance-label {
+    font-size: 1rem;
+    color: #2C3E50;
+    margin-top: 0.5rem;
+}
+
+.search-button {
+    margin-top: 1rem;
+    width: 100%;
+    font-size: 1rem;
+    font-weight: bold;
+    background-color: #007BFF;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.search-button:hover {
+    background-color: #0056b3;
+}
+
+.or-divider {
+    text-align: center;
+    font-size: 1rem;
+    font-weight: bold;
+    color: #7F8C8D;
+    margin: 1rem 0;
+}
+
+.no-records,
+.error-message {
+    text-align: center;
+    font-size: 1rem;
+    color: #E74C3C;
+    font-weight: bold;
+    margin-top: 1rem;
+}
+
+.map-container {
+    margin-top: 1rem;
+}
