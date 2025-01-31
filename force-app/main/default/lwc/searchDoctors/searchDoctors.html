@@ -176,7 +176,7 @@
         ></lightning-button>
     </lightning-card>
     <template if:true={mapMarkers.length}>
-        <lightning-map map-markers={mapMarkers} markers-title="Locations"></lightning-map>
+        <lightning-map map-markers={mapMarkers} markers-title="Locations" list-view="visible"></lightning-map>
     </template>
 
     <template if:true={noRecordsFound}>
@@ -188,3 +188,5 @@
     </template>
     
 </template>
+
+

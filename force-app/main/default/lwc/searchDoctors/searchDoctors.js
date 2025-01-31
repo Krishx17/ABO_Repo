@@ -59,7 +59,9 @@ export default class DoctorLocationMap extends LightningElement {
             postalCode: this.postalCode || null,
             city: this.city || null,
             state: this.state || null,
-            radius: this.radius || null
+            radius: this.radius || null,
+            userLat : 37.7749,
+            userLng : -122.4194
         };
 
         // console.log(searchParams.firstName);
@@ -119,4 +121,4 @@ export default class DoctorLocationMap extends LightningElement {
             }
         });
     }*/
-}
+} 
