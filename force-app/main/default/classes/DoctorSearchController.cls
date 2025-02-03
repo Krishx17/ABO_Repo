@@ -21,10 +21,10 @@ public with sharing class DoctorSearchController {
             conditions.add('State__c LIKE \'%' + String.escapeSingleQuotes(state) + '%\'');
         }
         if (String.isNotBlank(gender)) {
-            conditions.add('Gender__c LIKE \'%' + String.escapeSingleQuotes(gender) + '%\'');
+            conditions.add('Gender__c = \'' + String.escapeSingleQuotes(gender) + '\'');
         }
         if (String.isNotBlank(postalCode)) {
-            conditions.add('PostalCode__c LIKE \'%' + String.escapeSingleQuotes(postalCode) + '%\'');
+            conditions.add('PostalCode__c = \'' + String.escapeSingleQuotes(postalCode) + '\'');
         }
        
         // Apply geolocation filter if radius and user coordinates are provided
@@ -38,6 +38,7 @@ public with sharing class DoctorSearchController {
         }
 
         // Execute and return the query
+        System.debug(query);
         List<Doctor__c> records = Database.query(query);
         System.debug(records);
         return records;
